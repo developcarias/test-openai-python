@@ -5,6 +5,20 @@ from main import read_tickets, evaluate_reply, process_evaluation
 
 
 class TestSolution(unittest.TestCase):
+    def test_read_tickets(self):
+        # Test reading a valid CSV file
+        df = read_tickets('test_tickets.csv')
+        self.assertIsInstance(df, pd.DataFrame)
+
+        # Test handling of file not found
+        with self.assertRaises(FileNotFoundError):
+            read_tickets('non_existent.csv')
+
+        # Test handling of empty file
+        with patch('pandas.read_csv', side_effect=pd.errors.EmptyDataError):
+            with self.assertRaises(pd.errors.EmptyDataError):
+                read_tickets('empty.csv')
+
     @patch('main.client.chat.completions.create')
     def test_evaluate_reply(self, mock_create):
         # Mock the API response

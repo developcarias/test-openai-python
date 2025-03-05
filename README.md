@@ -21,6 +21,17 @@
    python main.py
    ```
 
+## Running Tests
+
+To run the tests, execute the following command:
+```bash
+pytest test_main.py
+```
+Ensure that you have `pytest` installed in your environment. You can install it using:
+```bash
+pip install pytest
+```
+
 ## Output
 
 - The script will generate a `tickets_evaluated.csv` file with the evaluation results.
